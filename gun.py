@@ -23,9 +23,9 @@ class Gun():
     def update_gun(self):
         #обновление пушки
         if self.move_right and self.rect.right < self.screen_rect.right:
-            self.center += 0.6
+            self.center += 0.7
         if self.move_left and self.rect.left > self.screen_rect.left:
-            self.center -= 0.6
+            self.center -= 0.7
 
         self.rect.centerx = self.center
 

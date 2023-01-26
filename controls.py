@@ -71,8 +71,8 @@ def gun_kill(stats, screen, gun, aliens, bullets, scores):
         gun.create_gun()
         time.sleep(1.5)
     else:
-        time.sleep(3)
-        sys.exit()
+        time.sleep(0.5)
+        end_screen(screen, stats)
 
 
 def update_aliens(stats, screen, gun, aliens, bullets, scores):
@@ -109,6 +109,67 @@ def create_army(screen, aliens):
             alien.rect.x = alien.x
             alien.rect.y = alien.rect.height + alien.rect.height * row_number
             aliens.add(alien)
+
+
+def start_screen(screen):
+    intro_text = [
+        "Цель игры:",
+        "Уничтожить максимальное кол-во инопришеленцов.",
+        "Управление:",
+        "Игрок может двигать пушкой влево и вправо с помощью кнопок A и D",
+        "Для стрельбы нажмите Пробел.",
+        "Для того чтобы начать игру, нажать любую клавишу"
+    ]
+    fon = pygame.transform.scale(pygame.image.load('images/begin.png'), (700, 800))
+    screen.blit(fon, (0, 0))
+    font = pygame.font.Font(None, 28)
+    text_coord = 50
+    for line in intro_text:
+        string_rendered = font.render(line, 1, pygame.Color('black'))
+        intro_rect = string_rendered.get_rect()
+        text_coord += 10
+        intro_rect.top = text_coord
+        intro_rect.x = 10
+        text_coord += intro_rect.height
+        screen.blit(string_rendered, intro_rect)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()  # выход
+            elif event.type == pygame.KEYDOWN:
+                return  # начало игры
+        pygame.display.flip()
+
+
+def end_screen(screen, stats):
+    intro_text = [
+        "End",
+        "Что мы имеем в итоге:",
+        "Набрано очков:" + str(stats.score),
+        "Рекорд очков:" + str(stats.highscore),
+        "Далее необходимо закрыть окно,",
+        "нажав на крестик или пробел"
+    ]
+    fon = pygame.transform.scale(pygame.image.load('images/begin.png'), (700, 800))
+    screen.blit(fon, (0, 0))
+    font = pygame.font.Font(None, 28)
+    text_coord = 50
+    for line in intro_text:
+        string_rendered = font.render(line, 1, pygame.Color('black'))
+        intro_rect = string_rendered.get_rect()
+        text_coord += 10
+        intro_rect.top = text_coord
+        intro_rect.x = 10
+        text_coord += intro_rect.height
+        screen.blit(string_rendered, intro_rect)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                sys.exit()
+        pygame.display.flip()
+
 
 
 def check_high_score(stats, scores):

@@ -18,6 +18,7 @@ def run():
     controls.create_army(screen, aliens)
     stats = Stats()
     scores = Scores(screen, stats)
+    controls.start_screen(screen)
 
     while True:
         controls.events(screen, gun, bullets)
